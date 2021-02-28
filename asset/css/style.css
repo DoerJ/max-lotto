@@ -1,0 +1,81 @@
+div#prize-num {
+  height: 100%;
+  padding-top: 300px;
+}
+div#prize-num label {
+  margin-top: 50px;
+}
+#prize-num-form {
+  text-align: center;
+}
+input.prize-num, input.bonus-num, input.num-set, input.bonus-set {
+  max-width: 80px;
+  height: 60px;
+  border: 1px solid black;
+  margin: 17px 12px;
+  font-size: 46px;
+  text-align: center;
+}
+.navigators {
+  margin-top: 78px;
+  margin-right: 600px;
+  text-align: right;
+}
+button#to-right, button#to-left, button#enter-main-num, button#enter-bonus-num {
+  background-color: black;
+  border-width: 0;
+}
+.col {
+  height: 100%;
+}
+#left-col {
+  padding-top: 260px;
+}
+#num-pool-form, #bonus-num-form {
+  text-align: center;
+}
+#bonus-num-form {
+  margin-top: 41px;
+}
+.enter-btn {
+  margin-top: 36px;
+  text-align: right;
+}
+.enter-btn button {
+  margin-right: 247px;
+}
+ul#display-num-set {
+  border: 1px solid black;
+  margin-top: 47px;
+  min-height: 413px;
+}
+ul#display-bonus-set {
+  border: 1px solid black;
+  min-height: 200px;
+}
+#right-col-navigators {
+  text-align: right;
+}
+#right-col-navigators > button {
+  margin-right: 20px;
+}
+ul > span {
+  font-size: 26px;
+  font-weight: bold;
+}
+li {
+  list-style-type: none;
+  font-size: 20px;
+  margin-top: 10px;
+}
+li:first-of-type {
+  margin-top: 53px;
+}
+#prize-result {
+  height: 100%;
+  text-align: center;
+  padding-top: 138px;
+}
+button.prize-result-navigator {
+  margin-top: 60px;
+}
