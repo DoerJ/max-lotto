@@ -1,6 +1,7 @@
 import { ElementRenderer } from './element-renderer.js';
 import { PrizeChecker } from './prize-checker.js';
 import { NumberPool } from './number-pool.js';
+import { ViewFader } from './view-fader.js';
 
 // input validators
 var inputValidator = (event) => {
@@ -87,40 +88,9 @@ export class ViewRenderer {
     }
     // if template has been rendered, just fade in the view instead
     else {
-      this.fadeInView(step);
+      ViewFader.fadeIn(step);
     }
 
-  }
-
-  static processData(step, callback) {
-    switch (step) {
-      // initialize price checker 
-      case 0: 
-        PrizeChecker.init(callback);
-        break;
-      default:
-        callback(); 
-        break;
-    }
-  }
-
-  static fadeInView(step) {
-    var view = ViewRenderer.viewMap.get(step);
-    var div = document.getElementById(view);
-    div.style.display = 'block';
-  }
-
-  static fadeOutView(step) {
-    // if fade out prize result, remove the content 
-    if (step === 2) {
-      let view = document.getElementById('prize-result-container');
-      view.remove();
-    }
-    else {
-      let view = ViewRenderer.viewMap.get(step);
-      let div = document.getElementById(view);
-      div.style.display = 'none'; 
-    }
   }
 
   // render the template for the prize number page

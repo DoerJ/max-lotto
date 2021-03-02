@@ -1,4 +1,6 @@
 import { ViewRenderer } from './view-renderer.js';
+import { DataProcessor } from './data-processor.js';
+import { ViewFader } from './view-fader.js';
 
 export class PageNavigator {
 
@@ -61,9 +63,9 @@ export class PageNavigator {
         // add click event listener to navigation button
         navigator.addEventListener('click', (event) => {
           // process input data before switching the view  
-          ViewRenderer.processData(self.currentStep, () => {
+          DataProcessor.process(self.currentStep, () => {
             // fade out the current view
-            ViewRenderer.fadeOutView(self.currentStep);
+            ViewFader.fadeOut(self.currentStep);
             if (event.target.id === 'to-left') {
               self.currentStep -= 1;
             }
