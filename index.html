@@ -8,8 +8,31 @@
   </head>
   <header></header>
   <body>
+    <!-- prize number page -->
     <div id="prize-num"></div>
-    <div id="num-pool"></div>
+
+    <!-- number pool page -->
+    <div id="num-pool" style="display: none;">
+
+      <!-- static parts -->
+      <div class="row">
+        <div id="left-col" class="col"></div>
+        <div id="right-col" class="col">
+          <ul id="display-num-set">
+            <span>你的彩票号码</span>
+          </ul>
+          <ul id="display-bonus-set">
+            <span>你的彩票Bonus号码</span>
+          </ul>
+          <div id="right-col-navigators">
+            <button id="to-left" class="num-pool-navigator btn btn-primary">上一步</button>
+            <button id="to-right" class="num-pool-navigator btn btn-primary">下一步</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- prize result page -->
     <div id="prize-result"></div>
   </body>
   <link 

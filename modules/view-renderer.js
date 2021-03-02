@@ -16,6 +16,7 @@ var inputValidator = (event) => {
       let enter_num = document.getElementById('enter-main-num');
       enter_num.disabled = !document.getElementById('num-pool-form').checkValidity();
       break;
+    // validator for bonus set input
     case 'bonus-num-set':
       let enter_bonus = document.getElementById('enter-bonus-num');
       enter_bonus.disabled = !document.getElementById('bonus-num-form').checkValidity();
@@ -52,6 +53,7 @@ var submitNumberSet = (event) => {
   // clear input fields value 
   for (let i = 0; i < set.length; i++) {
     str += (i === set.length - 1) ? set[i].value : `${set[i].value} &nbsp;&nbsp;&nbsp;`;
+    // clear the input value
     set[i].value = '';
   }
 
@@ -176,149 +178,106 @@ export class ViewRenderer {
 
   // render the template for the number pool page
   static renderNumPool() {
-    var container = document.getElementById('num-pool');
+    // set the view to visible 
+    document.getElementById('num-pool').style.display = 'block';
 
+    var left_col = document.getElementById('left-col');
     var content = ElementRenderer.render({
-      type: 'div',
-      classlist: ['row'],
+      el: document.createElement('div'),
       childs: [{
-        // left panel
-        type: 'div',
-        id: 'left-col',
-        classlist: ['col'],
+        // number pool form 
+        type: 'form',
+        id: 'num-pool-form',
         childs: [{
-          // number pool form 
-          type: 'form',
-          id: 'num-pool-form',
-          childs: [{
-            // input label for main number 
-            type: 'label',
-            text: '输入你的号码：'
-          }, {
-            // number pool input
-            element: ElementRenderer.renderPrizeNumInput({ 
-              num: 7, 
-              id: 'main-num',
-              classlist: ['num-set'],
-              attrs: { name: 'main-num-set' },
-              listener: { event: 'input', cb: inputValidator }
-            })
-          }]
+          // input label for main numbers 
+          type: 'label',
+          text: '输入你的号码：'
         }, {
-          type: 'div',
-          classlist: ['enter-btn'],
-          childs: [{
-            // submit the number set to the pool
-            type: 'button',
-            id: 'enter-main-num',
-            classlist: ['btn', 'btn-primary'],
-            attrs: { disabled: 'true' },
-            text: '输入',
-            listener: { event: 'click', cb: submitNumberSet }
-          }]
-        }, {
-          // bonus number input 
-          type: 'form',
-          id: 'bonus-num-form',
-          childs: [{
-            // input label for bonus
-            type: 'label',
-            text: '输入你的Bonus号码：'
-          }, {
-            // bonus number input
-            element: ElementRenderer.renderPrizeNumInput({
-              num: 7,
-              id: 'bonus-num',
-              classlist: ['bonus-set'],
-              attrs: { name: 'bonus-num-set' },
-              listener: { event: 'input', cb: inputValidator }
-            })
-          }]
-        }, {
-          type: 'div',
-          classlist: ['enter-btn'],
-          childs: [{
-            // submit button for bonus number
-            type: 'button',
-            id: 'enter-bonus-num',
-            classlist: ['btn', 'btn-primary'],
-            attrs: { disabled: 'true' },
-            text: '输入',
-            listener: { event: 'click', cb: submitNumberSet }
-          }]
-        }] 
+          // number pool input
+          element: ElementRenderer.renderPrizeNumInput({ 
+            num: 7, 
+            id: 'main-num',
+            classlist: ['num-set'],
+            attrs: { name: 'main-num-set' },
+            listener: { event: 'input', cb: inputValidator }
+          })
+        }]
       }, {
-        // right panel
         type: 'div',
-        id: 'right-col',
-        classlist: ['col'],
+        classlist: ['enter-btn'],
         childs: [{
-          // display area for number pool
-          type: 'ul',
-          id: 'display-num-set',
-          childs: [{
-            // header for display area 
-            type: 'span',
-            text: '你的彩票号码'
-          }]
+          // submit the number set to the pool
+          type: 'button',
+          id: 'enter-main-num',
+          classlist: ['btn', 'btn-primary'],
+          attrs: { disabled: 'true' },
+          text: '输入',
+          listener: { event: 'click', cb: submitNumberSet }
+        }]
+      }, {
+        // bonus number input 
+        type: 'form',
+        id: 'bonus-num-form',
+        childs: [{
+          // input label for bonus
+          type: 'label',
+          text: '输入你的Bonus号码：'
         }, {
-          // display area for bonus number set 
-          type: 'ul',
-          id: 'display-bonus-set',
-          childs: [{
-            // header for display area 
-            type: 'span',
-            text: '你的彩票Bonus号码'
-          }]
-        }, {
-          type: 'div',
-          id: 'right-col-navigators',
-          // navigation buttons
-          childs: [{
-            type: 'button',
-            classlist: ['num-pool-navigator', 'btn', 'btn-primary'],
-            id: 'to-left',
-            text: '上一步'
-          }, {
-            type: 'button',
-            classlist: ['num-pool-navigator', 'btn', 'btn-primary'],
-            id: 'to-right',
-            text: '下一步'
-          }]
+          // bonus number input
+          element: ElementRenderer.renderPrizeNumInput({
+            num: 7,
+            id: 'bonus-num',
+            classlist: ['bonus-set'],
+            attrs: { name: 'bonus-num-set' },
+            listener: { event: 'input', cb: inputValidator }
+          })
+        }]
+      }, {
+        type: 'div',
+        classlist: ['enter-btn'],
+        childs: [{
+          // submit button for bonus numbers
+          type: 'button',
+          id: 'enter-bonus-num',
+          classlist: ['btn', 'btn-primary'],
+          attrs: { disabled: 'true' },
+          text: '输入',
+          listener: { event: 'click', cb: submitNumberSet }
         }]
       }]
     });
 
-    container.appendChild(content);
+    left_col.appendChild(content);
     ViewRenderer.numPoolRendered = true;
   }
 
   // render template for prize result
   static renderPrizeResult() {
-    var container = document.getElementById('prize-result');    
-    var content = ElementRenderer.render({
+
+    var container = document.getElementById('prize-result');  
+    // create a container div for removal 
+    var content = ElementRenderer.buildElement({
       type: 'div',
-      id: 'prize-result-container',
+      id: 'prize-result-container'
+    }); 
+    var prize_list = ElementRenderer.render({
+      type: 'ul',
+      id: 'result-list',
       childs: [{
-        type: 'ul',
-        id: 'result-list',
-        childs: [{
-          type: 'span',
-          text: '你的中奖结果'
-        }]
+        type: 'span',
+        text: '你的中奖结果'
       }]
     });
 
     PrizeChecker.generatePrizeResult(result => {
       if (result.size === 0) {
-        content.innerHTML = '你没有中奖';
+        prize_list.innerHTML += '<li>你没有中奖</li>';
       }
       else {
         result.forEach((value, key) => {
-          content.innerHTML += `<li>${key}: ${value}</li>`;
+          prize_list.innerHTML += `<li>${key}: ${value}</li>`;
         });
-      }
-  
+      }  
       var navigator = ElementRenderer.buildElement({
         type: 'button',
         classlist: ['prize-result-navigator', 'btn', 'btn-primary'],
@@ -326,6 +285,7 @@ export class ViewRenderer {
         text: '上一步'
       });
 
+      content.appendChild(prize_list);
       content.appendChild(navigator);
       container.appendChild(content);
     });

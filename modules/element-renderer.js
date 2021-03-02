@@ -1,21 +1,23 @@
 
 export class ElementRenderer {
-  constructor() {
-
-  }
+  
+  constructor() { }
 
   // render a single DOM element
   static buildElement(el) {
     var _el = document.createElement(el.type);
-    _el.id = el.id ? el.id : '';
-    _el.innerHTML = el.text ? el.text : '';
-
-    // element classnames
+    // id
+    if (el.hasOwnProperty('id') && el.id !== '') {
+      _el.id = el.id;
+    }
+    // class names 
     if (el.hasOwnProperty('classlist')) {
       el.classlist.forEach((cl) => {
         _el.classList.add(cl);
       });
     }
+    // inner text
+    _el.innerHTML = el.text ? el.text : '';
 
     // element attributes
     if (el.hasOwnProperty('attrs')) {
@@ -27,13 +29,14 @@ export class ElementRenderer {
     if (el.hasOwnProperty('listener')) {
       _el.addEventListener(el.listener.event, el.listener.cb);
     }
+
     return _el;
   }
   
   // render DOM element group
   static render(parent) {
     var buildElementTree = (el) => {
-      var _el = (el.hasOwnProperty('element')) ? el.element :  ElementRenderer.buildElement(el);
+      var _el = (el.hasOwnProperty('element')) ? el.element : ElementRenderer.buildElement(el);
       if (!el.hasOwnProperty('childs')) {
         return _el; 
       }
