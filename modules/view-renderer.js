@@ -76,21 +76,20 @@ export class ViewRenderer {
 
   constructor() { }
 
-  static render(step) {
+  static render(step, from) {
+    // when fade-in, need to know the current view and the previous page to decide which direction to fade in
     if (step === 0 && !ViewRenderer.prizeNumRendered) {
       ViewRenderer.renderPrizeNum();
     }
-    else if (step === 1 && !ViewRenderer.numPoolRendered) {
-      ViewRenderer.renderNumPool();
-    }
-    else if (step === 2) {
-      ViewRenderer.renderPrizeResult();
-    }
-    // if template has been rendered, just fade in the view instead
     else {
-      ViewFader.fadeIn(step);
+      if (step === 1 && !ViewRenderer.numPoolRendered) {
+        ViewRenderer.renderNumPool();
+      }
+      else if (step === 2) {
+        ViewRenderer.renderPrizeResult();
+      }
+      ViewFader.fadeIn(step, from);
     }
-
   }
 
   // render the template for the prize number page
@@ -148,10 +147,8 @@ export class ViewRenderer {
 
   // render the template for the number pool page
   static renderNumPool() {
-    // set the view to visible 
-    document.getElementById('num-pool').style.display = 'block';
-
     var left_col = document.getElementById('left-col');
+
     var content = ElementRenderer.render({
       el: document.createElement('div'),
       childs: [{
@@ -223,7 +220,6 @@ export class ViewRenderer {
 
   // render template for prize result
   static renderPrizeResult() {
-
     var container = document.getElementById('prize-result');  
     // create a container div for removal 
     var content = ElementRenderer.buildElement({

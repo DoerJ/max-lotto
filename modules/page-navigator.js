@@ -46,8 +46,8 @@ export class PageNavigator {
     return bound;
   }
 
-  renderView() {
-    ViewRenderer.render(this.currentStep);
+  renderView(from) {
+    ViewRenderer.render(this.currentStep, from);
     this.registerNavigation();
   }
 
@@ -64,16 +64,22 @@ export class PageNavigator {
         navigator.addEventListener('click', (event) => {
           // process input data before switching the view  
           DataProcessor.process(self.currentStep, () => {
+            var id = event.target.id;
+            // store the current step as the previous 
+            var from = self.currentStep;
             // fade out the current view
-            ViewFader.fadeOut(self.currentStep);
-            if (event.target.id === 'to-left') {
-              self.currentStep -= 1;
-            }
-            else if (event.target.id === 'to-right') {
-              self.currentStep += 1;
-            }
-            // render the next view
-            self.renderView();
+            // after fadeout is done, render and fade in the next view
+            var fadeout = ViewFader.fadeOut(self.currentStep, id);
+            fadeout.then(() => {
+              if (id === 'to-left') {
+                self.currentStep -= 1;
+              }
+              else if (id === 'to-right') {
+                self.currentStep += 1;
+              }
+              // render the next view
+              self.renderView(from);
+            });
           });
         });
       }

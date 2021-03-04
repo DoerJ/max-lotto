@@ -79,3 +79,59 @@ li:first-of-type {
 button.prize-result-navigator {
   margin-top: 60px;
 }
+.fade-out-left {
+  animation: fade-out-left .8s forwards;
+}
+.fade-out-right {
+  animation: fade-out-right .8s forwards;
+}
+.fade-in-left {
+  opacity: 0;
+  display: block!important;
+  animation: fade-in-left .8s forwards;
+}
+.fade-in-right {
+  opacity: 0;
+  display: block!important;
+  animation: fade-in-right .8s forwards;
+}
+@keyframes fade-out-left {
+  0% {
+    opacity: 1;
+    margin-left: 0;
+  }
+  100% {
+    opacity: 0;
+    margin-left: -320px;
+  }
+}
+@keyframes fade-out-right {
+  0% {
+    opacity: 1;
+    margin-left: 0;
+  }
+  100% {
+    opacity: 0;
+    margin-left: 320px;
+  }
+}
+@keyframes fade-in-left {
+  0% {
+    opacity: 0;
+    margin-left: 320px;
+  }
+  100% {
+    opacity: 1;
+    margin-left: 0;
+  }
+}
+@keyframes fade-in-right {
+  0% {
+    opacity: 0;
+    margin-left: -320px;
+  }
+  100% {
+    opacity: 1;
+    margin-left: 0;
+  }
+}
