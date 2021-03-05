@@ -1,3 +1,7 @@
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 div#prize-num {
   height: 100%;
   padding-top: 300px;
@@ -31,6 +35,9 @@ button#to-right, button#to-left, button#enter-main-num, button#enter-bonus-num {
 #left-col {
   padding-top: 260px;
 }
+#right-col {
+  margin-right: 42px;
+}
 #num-pool-form, #bonus-num-form {
   text-align: center;
 }
@@ -45,12 +52,10 @@ button#to-right, button#to-left, button#enter-main-num, button#enter-bonus-num {
   margin-right: 247px;
 }
 ul#display-num-set {
-  border: 1px solid black;
   margin-top: 47px;
   min-height: 413px;
 }
 ul#display-bonus-set {
-  border: 1px solid black;
   min-height: 200px;
 }
 #right-col-navigators {

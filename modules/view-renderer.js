@@ -2,6 +2,7 @@ import { ElementRenderer } from './element-renderer.js';
 import { PrizeChecker } from './prize-checker.js';
 import { NumberPool } from './number-pool.js';
 import { ViewFader } from './view-fader.js';
+import { debounce } from './debounce.js';
 
 // input validators
 var inputValidator = (event) => {
@@ -22,9 +23,11 @@ var inputValidator = (event) => {
       let enter_bonus = document.getElementById('enter-bonus-num');
       enter_bonus.disabled = !document.getElementById('bonus-num-form').checkValidity();
       break;
-    default: break;
   }
 }
+
+// add debounce to input validator
+var validatorWithDebounce = debounce(inputValidator, 500);
 
 // submit new main number/bonus set  
 var submitNumberSet = (event) => {
@@ -110,7 +113,7 @@ export class ViewRenderer {
             id: 'prize-num',
             classlist: ['prize-num'],
             attrs: { name: 'prize-number' },
-            listener: { event: 'input', cb: inputValidator }
+            listener: { event: 'input', cb: validatorWithDebounce }
           })
         }, {
           type: 'label',
@@ -122,7 +125,7 @@ export class ViewRenderer {
             id: 'bonus-num',
             classlist: ['bonus-num'],
             attrs: { name: 'prize-number' },
-            listener: { event: 'input', cb: inputValidator }
+            listener: { event: 'input', cb: validatorWithDebounce }
           })
         }
       ]
@@ -166,7 +169,7 @@ export class ViewRenderer {
             id: 'main-num',
             classlist: ['num-set'],
             attrs: { name: 'main-num-set' },
-            listener: { event: 'input', cb: inputValidator }
+            listener: { event: 'input', cb: validatorWithDebounce }
           })
         }]
       }, {
@@ -196,7 +199,7 @@ export class ViewRenderer {
             id: 'bonus-num',
             classlist: ['bonus-set'],
             attrs: { name: 'bonus-num-set' },
-            listener: { event: 'input', cb: inputValidator }
+            listener: { event: 'input', cb: validatorWithDebounce }
           })
         }]
       }, {
@@ -220,6 +223,7 @@ export class ViewRenderer {
 
   // render template for prize result
   static renderPrizeResult() {
+    
     var container = document.getElementById('prize-result');  
     // create a container div for removal 
     var content = ElementRenderer.buildElement({
