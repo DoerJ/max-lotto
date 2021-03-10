@@ -42,18 +42,20 @@ var submitNumberSet = (event) => {
 
 // input validators
 var inputValidator = (event) => {
+  var btn;
+
   switch (event.target.name) {
     case 'prize-number':
-      let next = document.getElementById('to-right');
-      next.disabled = !document.getElementById('prize-num-form').checkValidity();
+      btn = document.getElementById('to-right');
+      btn.disabled = !document.getElementById('prize-num-form').checkValidity();
       break;
     case 'main-num-set':
-      let enter_num = document.getElementById('enter-main-num');
-      enter_num.disabled = !document.getElementById('num-pool-form').checkValidity();
+      btn = document.getElementById('enter-main-num');
+      btn.disabled = !document.getElementById('num-pool-form').checkValidity();
       break;
     case 'bonus-num-set':
-      let enter_bonus = document.getElementById('enter-bonus-num');
-      enter_bonus.disabled = !document.getElementById('bonus-num-form').checkValidity();
+      btn = document.getElementById('enter-bonus-num');
+      btn.disabled = !document.getElementById('bonus-num-form').checkValidity();
       break;
   }
 }
