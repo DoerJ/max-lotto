@@ -81,6 +81,9 @@ li:first-of-type {
   text-align: center;
   padding-top: 138px;
 }
+ul#result-list {
+  padding: 0;
+}
 button.prize-result-navigator {
   margin-top: 60px;
 }
